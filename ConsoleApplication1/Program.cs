@@ -75,7 +75,7 @@ namespace ConsoleApplication1
         {
             var formatedString = "";
             formatedString += $"{s.User.Name} @{s.User.ScreenName}\n";
-            formatedString += ((s.IsTruncated == true) ? s.FullText : s.Text) + "\n";
+            formatedString += s.Text + "\n";
             formatedString += new String('-', 100);
             return formatedString;
         }
