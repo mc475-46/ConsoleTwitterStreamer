@@ -18,14 +18,20 @@ namespace ConsoleApplication1
             Tokens tokens = null;
             while(tokens == null)
             {
-                var session = OAuth.Authorize("eJWUnMOcfA4zZ1AYTKCmueS94", 
-                    "YLZa7OwqdVnk5w7vnEdoCCWCoGSrbHm1YvCB8SQWs0OOevoKZb");
-                Console.WriteLine($"Jump here: {session.AuthorizeUri}");
-                Console.Write("Input PIN here: ");
                 try
                 {
+                    var session = OAuth.Authorize("eJWUnMOcfA4zZ1AYTKCmueS94",
+                    "YLZa7OwqdVnk5w7vnEdoCCWCoGSrbHm1YvCB8SQWs0OOevoKZb");
+                    Console.WriteLine($"Jump here: {session.AuthorizeUri}");
+                    Console.Write("Input PIN here: ");
                     var PIN = Console.ReadLine();
                     tokens = OAuth.GetTokens(session, PIN);
+                }
+                catch (System.Net.WebException we)
+                {
+                    Console.WriteLine("No connection to the Internet. Press Enter key to close.");
+                    Console.Read();
+                    Environment.Exit(1);
                 }
                 catch (TwitterException te)
                 {
