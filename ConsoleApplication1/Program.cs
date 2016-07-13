@@ -71,11 +71,11 @@ namespace ConsoleApplication1
 
         static string FormatStatus(Status s)
         {
-            var FormatedString = "";
-            FormatedString += $"{s.User.Name} @{s.User.ScreenName}\n";
-            FormatedString += ((s.IsTruncated == true) ? s.FullText : s.Text) + "\n";
-            FormatedString += $"{new String('-', 100)}";
-            return FormatedString;
+            var formatedString = "";
+            formatedString += $"{s.User.Name} @{s.User.ScreenName}\n";
+            formatedString += ((s.IsTruncated == true) ? s.FullText : s.Text) + "\n";
+            formatedString += new String('-', 100);
+            return formatedString;
         }
     }
 }
