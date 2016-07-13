@@ -66,7 +66,7 @@ namespace ConsoleApplication1
 
             while (true)
             {
-                Thread.Sleep(100000000);
+                Thread.Sleep(100);
             }
             stream.Dispose();
         }
