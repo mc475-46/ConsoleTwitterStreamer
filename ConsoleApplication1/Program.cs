@@ -40,7 +40,9 @@ namespace ConsoleApplication1
             }
             Console.WriteLine("Succeeded connecting to Twitter!");
 
-            foreach(var pastStatus in tokens.Statuses.HomeTimeline(10))
+            tokens.Statuses.Update(status => $"Twitter Streamer start up! {DateTime.Now}");
+
+            foreach (var pastStatus in tokens.Statuses.HomeTimeline(10))
             {
                 Console.WriteLine(FormatStatus(pastStatus));
             }
