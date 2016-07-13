@@ -15,6 +15,8 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Console Twitter Streamer");
+            Console.WriteLine("You can close this program by pressing Enter key while streaming.");
             Tokens tokens = null;
             while(tokens == null)
             {
@@ -64,10 +66,7 @@ namespace ConsoleApplication1
 
             tokens.Statuses.Update(status => $"Twitter Streamer start up! {DateTime.Now}");
 
-            while (true)
-            {
-                Thread.Sleep(100);
-            }
+            Console.Read();
             stream.Dispose();
         }
 
