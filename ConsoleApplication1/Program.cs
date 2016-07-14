@@ -95,11 +95,10 @@ namespace ConsoleApplication1
 
         static string FormatStatus(Status s)
         {
-            if(s.RetweetedStatus != null)
-            {
+            if (s.RetweetedStatus != null)
                 return FormatRetweetedStatus(s);
-            }
-            var formatedString =
+
+            return
                 $"{s.User.Name} @{s.User.ScreenName}\n" +
                 "\n" +
                 s.Text + "\n" +
@@ -107,14 +106,13 @@ namespace ConsoleApplication1
                 $"{s.CreatedAt.ToLocalTime().DateTime}" + "\n" +
                 $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\n" +
                 new string('-', 100);
-            return formatedString;
         }
 
         static string FormatRetweetedStatus(Status s)
         {
-            var formatedString = $"{s.User.Name}さんが{s.CreatedAt.ToLocalTime().DateTime}にリツイート:\n\n";
-            formatedString += FormatStatus(s.RetweetedStatus);
-            return formatedString;
+            return
+                $"{s.User.Name}さんが{s.CreatedAt.ToLocalTime().DateTime}にリツイート:\n\n" +
+                FormatStatus(s.RetweetedStatus);
         }
     }
 }
