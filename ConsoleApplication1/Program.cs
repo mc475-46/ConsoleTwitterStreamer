@@ -64,6 +64,7 @@ namespace ConsoleApplication1
                     () => Console.WriteLine("終点")
                 );
 
+            Thread.Sleep(TimeSpan.FromSeconds(10));
             tokens.Statuses.Update(status => $"Twitter Streamer start up! {DateTime.Now}");
 
             Console.Read();
