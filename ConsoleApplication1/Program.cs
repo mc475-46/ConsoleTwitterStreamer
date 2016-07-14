@@ -72,10 +72,21 @@ namespace ConsoleApplication1
 
         static string FormatStatus(Status s)
         {
-            var formatedString = "";
-            formatedString += $"{s.User.Name} @{s.User.ScreenName}\n";
-            formatedString += s.Text + "\n";
-            formatedString += new String('-', 100);
+            if(s.RetweetedStatus != null)
+            {
+                return FormatRetweetedStatus(s);
+            }
+            var formatedString =
+                $"{s.User.Name} @{s.User.ScreenName}\n" +
+                s.Text + "\n" +
+                new string('-', 100);
+            return formatedString;
+        }
+
+        static string FormatRetweetedStatus(Status s)
+        {
+            var formatedString = $"{s.User.Name}さんと{s.RetweetCount - 1}人がリツイート\n";
+            formatedString += FormatStatus(s.RetweetedStatus);
             return formatedString;
         }
     }
