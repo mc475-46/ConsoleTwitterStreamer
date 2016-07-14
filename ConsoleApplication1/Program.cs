@@ -86,7 +86,7 @@ namespace ConsoleApplication1
 
         static string FormatRetweetedStatus(Status s)
         {
-            var formatedString = $"{s.User.Name}さんと{s.RetweetCount - 1}人がリツイート\n";
+            var formatedString = $"{s.User.Name}さんが{s.CreatedAt.ToLocalTime()}にリツイート:\n\n";
             formatedString += FormatStatus(s.RetweetedStatus);
             return formatedString;
         }
