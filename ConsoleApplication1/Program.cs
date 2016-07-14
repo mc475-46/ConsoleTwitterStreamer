@@ -79,14 +79,18 @@ namespace ConsoleApplication1
             }
             var formatedString =
                 $"{s.User.Name} @{s.User.ScreenName}\n" +
+                "\n" +
                 s.Text + "\n" +
+                "\n" +
+                $"{s.CreatedAt.ToLocalTime().DateTime}" + "\n" +
+                $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\n" +
                 new string('-', 100);
             return formatedString;
         }
 
         static string FormatRetweetedStatus(Status s)
         {
-            var formatedString = $"{s.User.Name}さんが{s.CreatedAt.ToLocalTime()}にリツイート:\n\n";
+            var formatedString = $"{s.User.Name}さんが{s.CreatedAt.ToLocalTime().DateTime}にリツイート:\n\n";
             formatedString += FormatStatus(s.RetweetedStatus);
             return formatedString;
         }
