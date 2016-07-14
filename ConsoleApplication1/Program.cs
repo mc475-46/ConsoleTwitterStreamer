@@ -22,12 +22,34 @@ namespace ConsoleApplication1
             {
                 try
                 {
-                    var session = OAuth.Authorize("eJWUnMOcfA4zZ1AYTKCmueS94",
-                    "YLZa7OwqdVnk5w7vnEdoCCWCoGSrbHm1YvCB8SQWs0OOevoKZb");
-                    Console.WriteLine($"Jump here: {session.AuthorizeUri}");
-                    Console.Write("Input PIN here: ");
-                    var PIN = Console.ReadLine();
-                    tokens = OAuth.GetTokens(session, PIN);
+                    var consumerKey = "eJWUnMOcfA4zZ1AYTKCmueS94";
+                    var consumerSecret = "YLZa7OwqdVnk5w7vnEdoCCWCoGSrbHm1YvCB8SQWs0OOevoKZb";
+                    if (System.IO.File.Exists("./Tokens"))
+                    {
+                        var file = new System.IO.StreamReader(@"./Tokens");
+                        var accessToken = file.ReadLine();
+                        var accessTokenSecret = file.ReadLine();
+                        file.Close();
+                        tokens = Tokens.Create(
+                            consumerKey,
+                            consumerSecret,
+                            accessToken,
+                            accessTokenSecret);
+                    }
+                    else
+                    {
+                        var session = OAuth.Authorize(consumerKey, consumerSecret);
+                        Console.WriteLine($"Jump here: {session.AuthorizeUri}");
+                        Console.Write("Input PIN here: ");
+                        var PIN = Console.ReadLine();
+                        tokens = OAuth.GetTokens(session, PIN);
+                        var file = new System.IO.StreamWriter(
+                            path: @"./Tokens",
+                            append: true);
+                        file.WriteLine(tokens.AccessToken);
+                        file.WriteLine(tokens.AccessTokenSecret);
+                        file.Close();
+                    }
                 }
                 catch (System.Net.WebException we)
                 {
