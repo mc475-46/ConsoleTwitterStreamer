@@ -111,7 +111,7 @@ namespace ConsoleApplication1
                     $">{new string('-', 100)}\n" +
                     $">{FormatStatus(s.QuotedStatus).Replace("\n", "\n>")}\n" +
                     $"{s.CreatedAt.LocalDateTime}\n" +
-                    $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\n" +
+                    $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\tvia {s.Source}\n" +
                     new string('-', 100);
             }
             else
@@ -122,7 +122,7 @@ namespace ConsoleApplication1
                     s.Text + "\n" +
                     "\n" +
                     $"{s.CreatedAt.ToLocalTime().DateTime}\n"+
-                    $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\n" +
+                    $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\tvia {s.Source}\n" +
                     new string('-', 100);
             }
             return formatedStatus;
