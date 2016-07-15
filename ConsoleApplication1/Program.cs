@@ -95,24 +95,37 @@ namespace ConsoleApplication1
 
         static string FormatStatus(Status s)
         {
-            if (s.RetweetedStatus != null)
-                return FormatRetweetedStatus(s);
-
-            return
-                $"{s.User.Name} @{s.User.ScreenName}\n" +
-                "\n" +
-                s.Text + "\n" +
-                "\n" +
-                $"{s.CreatedAt.ToLocalTime().DateTime}" + "\n" +
-                $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\n" +
-                new string('-', 100);
-        }
-
-        static string FormatRetweetedStatus(Status s)
-        {
-            return
-                $"{s.User.Name}さんが{s.CreatedAt.ToLocalTime().DateTime}にリツイート:\n\n" +
-                FormatStatus(s.RetweetedStatus);
+            var formatedStatus = "";
+            if (s.RetweetedStatus != null) {
+                formatedStatus =
+                    $"{s.User.Name}さんが{s.CreatedAt.ToLocalTime().DateTime}にリツイート:\n" +
+                    "\n" +
+                    FormatStatus(s.RetweetedStatus);
+            }
+            else if (s.QuotedStatus != null)
+            {
+                formatedStatus =
+                    $"{s.User.Name} @{s.User.ScreenName}\n" +
+                    "\n" +
+                    $"{s.Text}\n" +
+                    $">{new string('-', 100)}\n" +
+                    $">{FormatStatus(s.QuotedStatus).Replace("\n", "\n>")}\n" +
+                    $"{s.CreatedAt.LocalDateTime}\n" +
+                    $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\n" +
+                    new string('-', 100);
+            }
+            else
+            {
+                formatedStatus =
+                    $"{s.User.Name} @{s.User.ScreenName}\n" +
+                    "\n" +
+                    s.Text + "\n" +
+                    "\n" +
+                    $"{s.CreatedAt.ToLocalTime().DateTime}\n"+
+                    $"Like:{s.FavoriteCount}\tRT:{s.RetweetCount}\n" +
+                    new string('-', 100);
+            }
+            return formatedStatus;
         }
     }
 }
